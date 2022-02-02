@@ -1,3 +1,6 @@
+This was a final project in my web development course. Ii is a Vue app where you can check the weather of different cities.
+
+
 # app
 
 ## Project setup
