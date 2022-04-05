@@ -1,37 +1,42 @@
 <template>
-  <div id="app" :class="typeof weather.main != 'undefined' && weather.main.temp > 20 ? 'warm' : ''">
-  <main>
-    <div class="heading">
-    <h1 class="head">Weather App</h1>
-    <h2>Harjoitustyö</h2>
-    <h3>Ville Puisto</h3>
-    </div>
-    <div class="search">
-      <input
-        type="text"
-        class="search-input"
-        placeholder="Search..."
-        v-model="query"
-        v-on:keypress="fetchWeather"
-      />
-    </div>
-
-    <div class="weather" v-if="typeof weather.main != 'undefined'">
-      <div class="location-div">
-        <div class="location">{{ weather.name }}, {{ weather.sys.country }}</div>
-        <div class="date">{{ dateShow() }}</div>
+  <div
+    id="app"
+    :class="
+      typeof weather.main != 'undefined' && weather.main.temp > 20 ? 'warm' : ''
+    "
+  >
+    <main>
+      <div class="heading">
+        <h1 class="head">Weather App</h1>
+        <h2>Harjoitustyö</h2>
+        <h3>Ville Puisto</h3>
+      </div>
+      <div class="search">
+        <input
+          type="text"
+          class="search-input"
+          placeholder="Search..."
+          v-model="query"
+          v-on:keypress="fetchWeather"
+        />
       </div>
 
-      <div class="weather-div">
-        <div class="temp">{{ Math.round(weather.main.temp) }}°c </div>
-        <div class="weather-status">{{ weather.weather[0].main }}</div>
+      <div class="weather" v-if="typeof weather.main != 'undefined'">
+        <div class="location-div">
+          <div class="location">
+            {{ weather.name }}, {{ weather.sys.country }}
+          </div>
+          <div class="date">{{ dateShow() }}</div>
+        </div>
+
+        <div class="weather-div">
+          <div class="temp">{{ Math.round(weather.main.temp) }}°c</div>
+          <div class="weather-status">{{ weather.weather[0].main }}</div>
+        </div>
       </div>
-    </div>
-  </main>
-
-
- </div>
-</template >
+    </main>
+  </div>
+</template>
 
 <script>
 
@@ -39,7 +44,7 @@ export default {
   name: 'App',
   data () {
     return {
-      api_key: '55684ec3631dc6ab225825b5e1de96f2',
+      api_key: process.env.VUE_APP_API_KEY,
       url_base: 'https://api.openweathermap.org/data/2.5/',
       query: '',
       weather: {}
@@ -74,12 +79,10 @@ export default {
 </script>
 
 <style>
-
-  .heading {
-     text-align: center;
-  }
-  .heading .head {
- 
+.heading {
+  text-align: center;
+}
+.heading .head {
   display: inline-block;
   padding: 15px 30px;
   color: white;
@@ -92,31 +95,35 @@ export default {
   margin: 35px 0px;
 
   box-shadow: 8px 10px rgba(0, 0, 0, 0.45);
-  }
+}
 * {
   margin: 5;
   padding: 5;
   box-sizing: border-box;
 }
 body {
-  font-family: 'Helvetica', sans-serif;
+  font-family: "Helvetica", sans-serif;
 }
 #app {
-  background-image: url('./assets/mountain-1848342_1280.png');
-  background-size:cover;
+  background-image: url("./assets/mountain-1848342_1280.png");
+  background-size: cover;
   background-position: bottom;
   transition: 0.6s;
 }
 
 #app.warm {
-  background-image: url('./assets/landscape-1844230_1280.png');
+  background-image: url("./assets/landscape-1844230_1280.png");
 }
 
 main {
   min-height: 100vh;
   padding: 30px;
 
-  background-image: linear-gradient(to bottom, rgba(0,0,0, 0.25), rgba(0,0,0, 0.65));
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.25),
+    rgba(0, 0, 0, 0.65)
+  );
 }
 .search-input {
   width: 100%;
@@ -136,13 +143,13 @@ main {
   background: none;
 
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.45);
-background-color: rgba(255, 255, 255, 0.7);
-border-radius: 0px 20px 0px 20px;
-transition: 0.6s;
-  }
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 0px 20px 0px 20px;
+  transition: 0.6s;
+}
 
-.search .search-input: focus {
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.50);
+.search.search-input focus {
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
   background-color: rgba(255, 255, 255, 0.85);
   border-radius: 16px 0px 16px 0px;
 }
