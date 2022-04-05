@@ -3,6 +3,8 @@ This was a final project in my web development course. Ii is a Vue app where you
 
 # app
 
+![](src/assets/weather.png)
+
 ## Project setup
 ```
 npm install
